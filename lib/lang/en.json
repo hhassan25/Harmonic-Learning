@@ -1,0 +1,11 @@
+{
+    "langCode": "us",
+    "login": "Login",
+    "username":"Username",
+    "password":"Password",
+    "filluserpass": "Enter username and password",
+    "checkuserpass": "Check username and password",
+    "welcome": "welcome",
+    "dashboard": "dashboard"
+    
+}
