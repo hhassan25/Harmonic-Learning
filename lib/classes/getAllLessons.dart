@@ -1,58 +1,75 @@
 // To parse this JSON data, do
 //
-//     final getData = getDataFromJson(jsonString);
+//     final getLesson = getLessonFromJson(jsonString);
 
 import 'dart:convert';
 
-List<GetData> getDataFromJson(String str) =>
-    List<GetData>.from(json.decode(str).map((x) => GetData.fromJson(x)));
+List<GetLesson> getLessonFromJson(String str) =>
+    List<GetLesson>.from(json.decode(str).map((x) => GetLesson.fromJson(x)));
 
-String getDataToJson(List<GetData> data) =>
+String getLessonToJson(List<GetLesson> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class GetData {
-  GetData({
+class GetLesson {
+  GetLesson({
     this.id,
-    this.fullname,
-    this.username,
-    this.password,
+    this.urll,
+    this.courseType,
+    this.courseName,
+    this.courseImage,
     this.classId,
-    this.accountType,
+    this.courseId,
+    this.isDemo,
+    this.langCode,
   });
 
   String id;
-  String fullname;
-  String username;
-  String password;
+  String urll;
+  CourseType courseType;
+  String courseName;
+  String courseImage;
   String classId;
-  AccountType accountType;
+  String courseId;
+  String isDemo;
+  LangCode langCode;
 
-  factory GetData.fromJson(Map<String, dynamic> json) => GetData(
-        id: json["id"],
-        fullname: json["fullname"],
-        username: json["username"],
-        password: json["password"],
+  factory GetLesson.fromJson(Map<String, dynamic> json) => GetLesson(
+        id: json["ID"],
+        urll: json["urll"],
+        courseType: courseTypeValues.map[json["courseType"]],
+        courseName: json["courseName"],
+        courseImage: json["courseImage"],
         classId: json["classID"],
-        accountType: accountTypeValues.map[json["accountType"]],
+        courseId: json["courseID"],
+        isDemo: json["isDemo"],
+        langCode: langCodeValues.map[json["langCode"]],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "fullname": fullname,
-        "username": username,
-        "password": password,
+        "ID": id,
+        "urll": urll,
+        "courseType": courseTypeValues.reverse[courseType],
+        "courseName": courseName,
+        "courseImage": courseImage,
         "classID": classId,
-        "accountType": accountTypeValues.reverse[accountType],
+        "courseID": courseId,
+        "isDemo": isDemo,
+        "langCode": langCodeValues.reverse[langCode],
       };
 }
 
-enum AccountType { EMPTY, USER, ADMIN }
+enum CourseType { COURSE_TYPE, EMPTY, PDF }
 
-final accountTypeValues = EnumValues({
-  "admin": AccountType.ADMIN,
-  "": AccountType.EMPTY,
-  "user": AccountType.USER
+final courseTypeValues = EnumValues({
+  "courseType": CourseType.COURSE_TYPE,
+  "": CourseType.EMPTY,
+  "pdf": CourseType.PDF
 });
+
+enum LangCode { LANGUAGE, EN, AR }
+
+final langCodeValues = EnumValues(
+    {"ar": LangCode.AR, "en": LangCode.EN, "language": LangCode.LANGUAGE});
 
 class EnumValues<T> {
   Map<String, T> map;

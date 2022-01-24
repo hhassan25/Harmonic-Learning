@@ -85,6 +85,7 @@ class _studentDashboardState extends State<studentDashboard> {
                             MaterialPageRoute(
                                 builder: (context) => Lessons(
                                       str: '${widget.str}',
+                                      langCode: '${widget.langCode}',
                                     )));
                       },
                       child: Material(
@@ -118,7 +119,10 @@ class _studentDashboardState extends State<studentDashboard> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Projects()));
+                                builder: (context) => Projects(
+                                      str: '${widget.str}',
+                                      langCode: '${widget.langCode}',
+                                    )));
                       },
                       child: Material(
                           elevation: 5.0,

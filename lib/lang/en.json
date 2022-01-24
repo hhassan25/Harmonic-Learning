@@ -6,6 +6,10 @@
     "filluserpass": "Enter username and password",
     "checkuserpass": "Check username and password",
     "welcome": "welcome",
-    "dashboard": "dashboard"
+    "dashboard": "dashboard",
+    "myLessons": "My Lessons",
+    "uploadProject": "Upload a project",
+    "noFileSelected": "No File Is Selected",
+    "uploadFile": "Upload the project"
     
 }

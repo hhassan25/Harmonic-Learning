@@ -38,6 +38,8 @@ dependencies:
   flutter_inappwebview:
   package_info: ^0.4.1
   dio: ^3.0.8
+  cached_network_image:
+  file_picker: ^2.1.5+1
   flutter_localizations:
     sdk: flutter
 

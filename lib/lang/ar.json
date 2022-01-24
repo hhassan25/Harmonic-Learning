@@ -6,6 +6,10 @@
     "filluserpass": "أدخل اسم المستخدم وكلمة المرور",
     "checkuserpass": "خطأ في اسم المستخدم وكلمة المرور",
     "welcome": "اهلا وسهلا",
-    "dashboard": "الصفحة الرئيسية"
+    "dashboard": "الصفحة الرئيسية",
+    "myLessons": "دروسي",
+    "uploadProject": "تسليم مشروع",
+    "noFileSelected": "لم يتم اختيار اي ملف حتى الان",
+    "uploadFile": "تصدير المشروع"
     
 }
