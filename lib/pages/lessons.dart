@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:harmonic_learning/classes/getAllLessons.dart';
 import 'package:harmonic_learning/localization/localization_constants.dart';
 import 'package:harmonic_learning/pages/studentDashboard.dart';
+import 'package:harmonic_learning/pages/viewLesson.dart';
 import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -16,7 +17,7 @@ class Lessons extends StatefulWidget {
 }
 
 class _LessonsState extends State<Lessons> {
-  Future<List<GetLesson>> fetchUsers() async {
+  Future<List<GetLesson>> _fetchUsers() async {
     String url =
         "https://hadi.yallaproductionz.com/edugment/getPdf.php?username=" +
             '${widget.str}' +
@@ -51,7 +52,7 @@ class _LessonsState extends State<Lessons> {
           ),
           body: Center(
             child: FutureBuilder(
-              future: fetchUsers(),
+              future: _fetchUsers(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
@@ -65,7 +66,64 @@ class _LessonsState extends State<Lessons> {
                             horizontal: 0.0,
                           ),
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if ('${getLesson.isDemo}' == '0') {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => viewLesson(
+                                              str: '${widget.str}',
+                                              pdfurl: '${getLesson.urll}',
+                                            )));
+                              } else {
+                                var alert = AlertDialog(
+                                  title:
+                                      Text(getTranslated(context, 'warning')),
+                                  content: Container(
+                                    height: 130,
+                                    child: Column(
+                                      children: [
+                                        Divider(
+                                          color: Colors.black,
+                                        ),
+                                        Text(getTranslated(
+                                            context, 'appIsDemo')),
+                                        SizedBox(
+                                          height: 12,
+                                        ),
+                                        SizedBox(
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                RaisedButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context,
+                                                            rootNavigator: true)
+                                                        .pop('alert');
+                                                  },
+                                                  child: Text(
+                                                    getTranslated(
+                                                        context, 'ok'),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return alert;
+                                    });
+                              }
+                            },
                             child: Card(
                               child: Row(
                                 children: [
@@ -83,8 +141,12 @@ class _LessonsState extends State<Lessons> {
                                       ),
                                     ),
                                   ),
-                                  Column(
-                                    children: [Text(getLesson.courseName)],
+                                  Padding(
+                                    padding: EdgeInsets.all(4.0),
+                                    child: Text(
+                                      getLesson.courseName,
+                                      style: TextStyle(fontSize: 12),
+                                    ),
                                   )
                                 ],
                               ),
@@ -95,7 +157,7 @@ class _LessonsState extends State<Lessons> {
                 }
                 return Center(
                     child: SpinKitThreeBounce(
-                  color: Colors.redAccent,
+                  color: Colors.blue,
                   size: 30,
                 ));
               },

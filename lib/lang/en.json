@@ -1,5 +1,5 @@
 {
-    "langCode": "us",
+    "langCode": "en",
     "login": "Login",
     "username":"Username",
     "password":"Password",
@@ -10,6 +10,21 @@
     "myLessons": "My Lessons",
     "uploadProject": "Upload a project",
     "noFileSelected": "No File Is Selected",
-    "uploadFile": "Upload the project"
+    "uploadFile": "Upload the project",
+    "fileExist":  "The name of project already exists",
+    "sureToUpload": "When clicking yes, your teacher will be able to view your project.",
+    "yes": "yes",
+    "no": "no",
+    "fileUploaded": "File Uploaded Successfully TO Server",
+    "shareFile" : "Share Project With Teacher",
+    "uploadFirst": "You have to upload file first",
+    "chooseFileFirst": "You have to choose file first",
+    "shareDone": "File was successfully shared",
+    "chooseFile": "Choose File",
+    "lesson" : "Read Lesson",
+    "warning": "warning",
+    "appIsDemo": "This copy is a demo, not all the courses are available",
+    "ok":"ok"
+
     
 }

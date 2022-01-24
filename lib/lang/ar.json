@@ -10,6 +10,20 @@
     "myLessons": "دروسي",
     "uploadProject": "تسليم مشروع",
     "noFileSelected": "لم يتم اختيار اي ملف حتى الان",
-    "uploadFile": "تصدير المشروع"
+    "uploadFile": "تصدير المشروع",
+    "fileExist":  "هناك مشروع سابق بنفس الاسم",
+    "sureToUpload": "عند الضغط على عبارة نعم، سيصبح المشروع ظاهرا عند المدرس",
+    "yes": "نعم",
+    "no": "كلا",
+    "fileUploaded": "تم تصدير المشروع بنجاح",
+    "shareFile" : "مشاركة المشروع مع الاستاذ",
+    "uploadFirst": "يجب تصدير الملف قبل المشاركة",
+    "chooseFileFirst": "يجب اختيار ملف قبل التصدير",
+    "shareDone": "تمت مشاركة المشروع بنجاح",
+    "chooseFile": "اختيار ملف",
+    "lesson" : "اقرأ درسي",
+    "warning": "warning",
+    "appIsDemo": "This copy is a demo, not all the courses are available",
+    "ok":"ok"
     
 }

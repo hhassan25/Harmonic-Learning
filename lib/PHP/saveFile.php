@@ -16,8 +16,8 @@
     
         move_uploaded_file($myVideoTmpName, $uploadFolder);
     
-        $uplaod = $connect->query("insert into edugment_projects(fileName,fileUrl,userID) VALUES 
-        ('$myVideo','$newFileName','.$username.')");
+        $uplaod = $connect->query("insert into edugment_projects(fileName,fileUrl) VALUES 
+        ('$myVideo','$newFileName')");
         if($upload){
             echo json_encode("upload successful");
         }
