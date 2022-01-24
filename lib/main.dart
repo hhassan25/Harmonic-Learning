@@ -1,3 +1,5 @@
+import 'package:http/http.dart' as http;
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:harmonic_learning/pages/studentDashboard.dart';
@@ -9,7 +11,17 @@ import 'pages/login.dart';
 import 'pages/loading.dart';
 import 'pages/profile.dart';
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 void main() async {
+  HttpOverrides.global = new MyHttpOverrides();
   runApp(OverlaySupport(child: MyApp()));
   /*WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
