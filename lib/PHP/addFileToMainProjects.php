@@ -18,7 +18,7 @@
 	    
 	    else{
 	     $insert = "INSERT INTO edugment_projects_main (fileName, fileUrl, username)
-	     select fileName, fileUrl, '".$username."' from edugment_projects where id = (select Max(id) from edugment_projects)";
+	     select  '".$fileName."', fileUrl, '".$username."' from edugment_projects where id = (select Max(id) from edugment_projects)";
 	     $query = mysqli_query($connect,$insert);
 	     if ($query) {
 	     	echo json_encode("Success");

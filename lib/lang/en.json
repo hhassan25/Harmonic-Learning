@@ -24,7 +24,8 @@
     "lesson" : "Read Lesson",
     "warning": "warning",
     "appIsDemo": "This copy is a demo, not all the courses are available",
-    "ok":"ok"
+    "ok":"ok",
+    "fileName": "Give a name for your project"
 
     
 }

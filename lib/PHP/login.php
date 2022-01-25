@@ -17,7 +17,7 @@
 	}
 
 	else if($count == 1 && $value[2] == "admin"){
-		echo json_encode("loginToAdmin");
+		echo json_encode("loginToTeacher");
 	}
 
 	else if($username == "" || $password == ""){

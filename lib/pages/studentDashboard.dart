@@ -49,8 +49,13 @@ class _studentDashboardState extends State<studentDashboard> {
                     padding: EdgeInsets.symmetric(vertical: 10.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => Aman()));
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Aman(
+                                      str: '${widget.str}',
+                                      langCode: '${widget.langCode}',
+                                    )));
                       },
                       child: Material(
                           elevation: 5.0,

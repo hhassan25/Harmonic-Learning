@@ -1,18 +1,18 @@
-import 'package:flutter/material.dart';
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:harmonic_learning/pages/studentDashboard.dart';
+import 'package:harmonic_learning/pages/teacherDashboard.dart';
 
-class Aman extends StatefulWidget {
+class AmanAdmin extends StatefulWidget {
   final String str;
   final String langCode;
-  const Aman({Key key, this.str, this.langCode}) : super(key: key);
+  const AmanAdmin({Key key, this.str, this.langCode}) : super(key: key);
 
   @override
-  _AmanState createState() => _AmanState();
+  _AmanAdminState createState() => _AmanAdminState();
 }
 
-class _AmanState extends State<Aman> {
+class _AmanAdminState extends State<AmanAdmin> {
   bool _isLoading = true;
   PDFDocument document;
 
@@ -32,7 +32,7 @@ class _AmanState extends State<Aman> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => studentDashboard(
+            builder: (context) => TeacherDashboard(
                   str: '${widget.str}',
                   langCode: '${widget.langCode}',
                 )));
@@ -45,7 +45,7 @@ class _AmanState extends State<Aman> {
       child: Scaffold(
           appBar: AppBar(
             title: Text("welcome"),
-            backgroundColor: Colors.blue[900],
+            backgroundColor: Colors.red[900],
             centerTitle: true,
           ),
           body: Center(

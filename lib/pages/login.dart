@@ -64,8 +64,23 @@ class _LoginState extends State<Login> {
                     )));
       }
     } else if (data == "loginToTeacher") {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => TeacherDashboard()));
+      if (getTranslated(context, 'langCode') == 'en') {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => TeacherDashboard(
+                      str: username.text,
+                      langCode: 'en',
+                    )));
+      } else {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => TeacherDashboard(
+                      str: username.text,
+                      langCode: 'ar',
+                    )));
+      }
     } else {
       showSimpleNotification(
         Text(

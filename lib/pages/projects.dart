@@ -40,7 +40,7 @@ class _ProjectsState extends State<Projects> {
     var response = await http.post(url, body: {
       "username": '${widget.str}'.toString(),
       "fileUrl": fileUrl.toString(),
-      "fileName": fileUrl.toString()
+      "fileName": fileName.text.toString()
     });
 
     var data = json.decode(response.body);
@@ -89,11 +89,14 @@ class _ProjectsState extends State<Projects> {
                 )));
   }
 
+  TextEditingController fileName = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(getTranslated(context, 'uploadProject')),
           centerTitle: true,
@@ -128,147 +131,209 @@ class _ProjectsState extends State<Projects> {
                 }
                 return Center(
                     child: SpinKitThreeBounce(
-                  color: Colors.redAccent,
+                  color: Colors.white,
                   size: 30,
                 ));
               },
             ),
-            RaisedButton(
-              onPressed: () {
-                chooseFile();
-                fileChosen = true;
-              },
-              child: Text(getTranslated(context, 'chooseFile')),
-            ),
             SizedBox(
               height: 10,
             ),
-            Center(
-                child: Text(
-              fileUrl != null
-                  ? fileUrl
-                  : getTranslated(context, 'noFileSelected'),
-              style: TextStyle(color: Colors.black38),
-            )),
-            SizedBox(height: 5),
-            RaisedButton(
-              onPressed: () {
-                if (fileChosen == false) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Colors.red[900],
-                    content: Text(
-                      getTranslated(context, 'chooseFileFirst'),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'Alike'),
-                    ),
-                  ));
-                } else {
-                  saveFile();
-                  fileUploaded = true;
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Colors.blue[900],
-                    content: Text(
-                      getTranslated(context, 'fileUploaded'),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'Alike'),
-                    ),
-                  ));
-                }
-              },
-              child: Text(getTranslated(context, 'uploadFile')),
+            Expanded(
+              flex: 3,
+              child: Image(
+                image: AssetImage('assets/logo.jpeg'),
+              ),
             ),
-            RaisedButton(
-              onPressed: () {
-                if (fileUploaded == true) {
-                  var alert = AlertDialog(
-                    title: Text(getTranslated(context, 'uploadFile')),
-                    content: Container(
-                      height: 130,
-                      child: Column(
-                        children: [
-                          Divider(
-                            color: Colors.black,
-                          ),
-                          Text(getTranslated(context, 'sureToUpload')),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          SizedBox(
-                            child: Center(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  RaisedButton(
-                                    onPressed: () {
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pop('alert');
-                                      addProjectToMain();
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                        backgroundColor: Colors.blue[900],
-                                        content: Text(
-                                          getTranslated(context, 'shareDone'),
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontFamily: 'Alike'),
-                                        ),
-                                      ));
-                                    },
-                                    child: Text(
-                                      getTranslated(context, 'yes'),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  RaisedButton(
-                                    onPressed: () {
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pop('alert');
-                                    },
-                                    child: Text(
-                                      getTranslated(context, 'no'),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              flex: 7,
+              child: Column(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width - 30,
+                    height: 55,
+                    padding:
+                        EdgeInsets.only(top: 4, left: 16, right: 16, bottom: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.blue, blurRadius: 10)
+                        ]),
+                    child: TextFormField(
+                      controller: fileName,
+                      cursorColor: Colors.blue,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        icon: Icon(
+                          Icons.book,
+                          color: Colors.blue,
+                        ),
+                        hintText: getTranslated(context, 'fileName'),
+                        hintStyle: TextStyle(
+                            color: Colors.black45,
+                            fontFamily: 'Quando',
+                            fontSize: 12),
                       ),
                     ),
-                  );
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return alert;
-                      });
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Colors.red[900],
-                    content: Text(
-                      getTranslated(context, 'uploadFirst'),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'Alike'),
-                    ),
-                  ));
-                }
-              },
-              child: Text(getTranslated(context, 'shareFile')),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  RaisedButton(
+                    color: Color.fromARGB(255, 64, 236, 70),
+                    onPressed: () {
+                      chooseFile();
+                      fileChosen = true;
+                    },
+                    child: Text(getTranslated(context, 'chooseFile')),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                      child: Text(
+                    fileUrl != null
+                        ? fileUrl
+                        : getTranslated(context, 'noFileSelected'),
+                    style: TextStyle(color: Colors.black38),
+                  )),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  RaisedButton(
+                    color: Color.fromARGB(255, 255, 151, 186),
+                    onPressed: () {
+                      if (fileChosen == false) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.red[900],
+                          content: Text(
+                            getTranslated(context, 'chooseFileFirst'),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontFamily: 'Alike'),
+                          ),
+                        ));
+                      } else {
+                        saveFile();
+                        fileUploaded = true;
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.blue[900],
+                          content: Text(
+                            getTranslated(context, 'fileUploaded'),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontFamily: 'Alike'),
+                          ),
+                        ));
+                      }
+                    },
+                    child: Text(getTranslated(context, 'uploadFile')),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  RaisedButton(
+                    color: Color.fromARGB(255, 255, 53, 39),
+                    onPressed: () {
+                      if (fileUploaded == true && fileName.text != "") {
+                        var alert = AlertDialog(
+                          title: Text(getTranslated(context, 'uploadFile')),
+                          content: Container(
+                            height: 130,
+                            child: Column(
+                              children: [
+                                Divider(
+                                  color: Colors.black,
+                                ),
+                                Text(getTranslated(context, 'sureToUpload')),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                SizedBox(
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        RaisedButton(
+                                          onPressed: () {
+                                            Navigator.of(context,
+                                                    rootNavigator: true)
+                                                .pop('alert');
+                                            addProjectToMain();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                              backgroundColor: Colors.blue[900],
+                                              content: Text(
+                                                getTranslated(
+                                                    context, 'shareDone'),
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontFamily: 'Alike'),
+                                              ),
+                                            ));
+                                            fileName.text == "";
+                                          },
+                                          child: Text(
+                                            getTranslated(context, 'yes'),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        RaisedButton(
+                                          onPressed: () {
+                                            Navigator.of(context,
+                                                    rootNavigator: true)
+                                                .pop('alert');
+                                          },
+                                          child: Text(
+                                            getTranslated(context, 'no'),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return alert;
+                            });
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.red[900],
+                          content: Text(
+                            getTranslated(context, 'uploadFirst'),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontFamily: 'Alike'),
+                          ),
+                        ));
+                      }
+                    },
+                    child: Text(getTranslated(context, 'shareFile')),
+                  )
+                ],
+              ),
             )
           ],
         ),
