@@ -43,6 +43,7 @@ class _LessonsAdminState extends State<LessonsAdmin> {
 
   @override
   Widget build(BuildContext context) {
+    fetchUsers();
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(

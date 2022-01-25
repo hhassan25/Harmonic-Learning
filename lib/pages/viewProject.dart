@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:harmonic_learning/classes/getProject.dart';
 import 'package:harmonic_learning/localization/localization_constants.dart';
+import 'package:harmonic_learning/pages/evaluateProject.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'teacherDashboard.dart';
@@ -130,6 +131,17 @@ class _ViewProjectState extends State<ViewProject> {
                                                 Navigator.of(context,
                                                         rootNavigator: true)
                                                     .pop('alert');
+                                                Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            EvaluateProject(
+                                                              str: getProject
+                                                                  .username,
+                                                              fileName:
+                                                                  getProject
+                                                                      .fileName,
+                                                            )));
                                               },
                                               child: Text(
                                                 getTranslated(
