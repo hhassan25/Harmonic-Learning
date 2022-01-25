@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:harmonic_learning/pages/amanForTeacher.dart';
 import 'package:harmonic_learning/pages/lessonsForTeacher.dart';
@@ -41,10 +42,25 @@ class _TeacherDashboardState extends State<TeacherDashboard> {
           height: MediaQuery.of(context).size.height,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: ListView(
+              scrollDirection: Axis.vertical,
               children: [
+                Center(
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      WavyAnimatedText('Internet Safety Booklet',
+                          textStyle: TextStyle(
+                              fontSize: 25,
+                              fontFamily: 'Quando',
+                              color: Colors.green)),
+                    ],
+                    isRepeatingAnimation: true,
+                    repeatForever: true,
+                    onTap: () {
+                      print("Tap Event");
+                    },
+                  ),
+                ),
                 Expanded(
                   flex: 5,
                   child: Padding(
@@ -63,19 +79,39 @@ class _TeacherDashboardState extends State<TeacherDashboard> {
                             height: 300,
                             width: 300,
                             decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(0)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.redAccent, blurRadius: 20)
-                                ]),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0)),
+                              color: Colors.white,
+                            ),
                             child: Image(
                               fit: BoxFit.fill,
                               image: AssetImage("assets/HeroesLogo.jpeg"),
                             ),
                           )),
                     ),
+                  ),
+                ),
+                Divider(
+                  color: Colors.red,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText('Lessons',
+                          textStyle: TextStyle(
+                            fontSize: 25,
+                            fontFamily: 'Quando',
+                            color: Colors.red,
+                          )),
+                    ],
+                    isRepeatingAnimation: true,
+                    repeatForever: true,
+                    onTap: () {
+                      print("Tap Event");
+                    },
                   ),
                 ),
                 Expanded(
@@ -99,19 +135,38 @@ class _TeacherDashboardState extends State<TeacherDashboard> {
                             height: 300,
                             width: 300,
                             decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(0.0)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.redAccent, blurRadius: 20)
-                                ]),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0.0)),
+                              color: Colors.white,
+                            ),
                             child: Image(
                               fit: BoxFit.fill,
                               image: AssetImage("assets/lessons.png"),
                             ),
                           )),
                     ),
+                  ),
+                ),
+                Divider(
+                  color: Colors.blue,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      TyperAnimatedText('View Projects',
+                          textStyle: TextStyle(
+                            fontSize: 25,
+                            fontFamily: 'Quando',
+                            color: Colors.blue,
+                          )),
+                    ],
+                    repeatForever: true,
+                    onTap: () {
+                      print("Tap Event");
+                    },
                   ),
                 ),
                 Expanded(
@@ -132,13 +187,10 @@ class _TeacherDashboardState extends State<TeacherDashboard> {
                             height: 300,
                             width: 300,
                             decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.redAccent, blurRadius: 20)
-                                ]),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100)),
+                              color: Colors.white,
+                            ),
                             child: Image(
                               fit: BoxFit.fill,
                               image: AssetImage("assets/project.png"),

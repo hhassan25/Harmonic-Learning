@@ -25,6 +25,12 @@
     "warning": "warning",
     "appIsDemo": "This copy is a demo, not all the courses are available",
     "ok":"ok",
-    "fileName": "اعط اسم للمشروع"
+    "fileName": "اعط اسم للمشروع",
+    "projects": "المشاريع",
+    "whatToDo" : "ما هي العملية التي ترغب بالقيام بها",
+    "openProject": "فتح",
+    "evaluate":"تقييم",
+    "projectDetails": "معلومات حول المشروع",
+    "urlError": "تأكد من الاتصال بالشبكة"
     
 }

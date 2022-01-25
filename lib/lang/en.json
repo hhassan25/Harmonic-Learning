@@ -25,7 +25,13 @@
     "warning": "warning",
     "appIsDemo": "This copy is a demo, not all the courses are available",
     "ok":"ok",
-    "fileName": "Give a name for your project"
+    "fileName": "Give a name for your project",
+    "projects": "Pojects",
+    "whatToDo" : "What do you want to do with this project",
+    "openProject": "Open",
+    "evaluate":"Evaluate",
+    "projectDetails": "Project Details",
+    "urlError": "Cannot load project, check internet connection"
 
     
 }

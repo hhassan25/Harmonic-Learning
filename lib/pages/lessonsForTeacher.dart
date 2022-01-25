@@ -64,6 +64,9 @@ class _LessonsAdminState extends State<LessonsAdmin> {
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, index) {
                         GetLesson getLesson = snapshot.data[index];
+                        Color backColor = getLesson.isDemo == '0'
+                            ? Colors.grey
+                            : Color.fromARGB(255, 255, 255, 255);
                         return Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: 0.0,
@@ -129,10 +132,11 @@ class _LessonsAdminState extends State<LessonsAdmin> {
                               }
                             },
                             child: Card(
+                              color: backColor,
                               child: Row(
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor: Colors.white,
+                                    backgroundColor: backColor,
                                     radius: 30,
                                     child: Padding(
                                       padding: const EdgeInsets.all(2.0),
@@ -156,16 +160,6 @@ class _LessonsAdminState extends State<LessonsAdmin> {
                                           ),
                                         ],
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            getLesson.classId,
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ],
-                                      )
                                     ]),
                                   ),
                                 ],
