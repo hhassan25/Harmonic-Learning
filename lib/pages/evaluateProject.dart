@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:harmonic_learning/localization/localization_constants.dart';
 import 'package:harmonic_learning/pages/SustainableDevelopment.dart';
+import 'package:http/http.dart' as http;
 
 class EvaluateProject extends StatefulWidget {
   final String str;
@@ -40,20 +42,7 @@ class _EvaluateProjectState extends State<EvaluateProject> {
   int humanityResult = 0;
   Color humanityResultColor;
 
-  double total;
-
-  void _calculateTotal() {
-    setState(() {
-      int sum = scienceResult +
-          technologyResult +
-          engineerResult +
-          artsResult +
-          mathResult +
-          productionResult +
-          humanityResult;
-      total = sum / 7;
-    });
-  }
+  int total = 0;
 
   void _scienceChangeValue(int value) {
     setState(() {
@@ -204,6 +193,18 @@ class _EvaluateProjectState extends State<EvaluateProject> {
           break;
       }
     });
+  }
+
+  Future addMarks() async {
+    var url =
+        Uri.parse('https://hadi.yallaproductionz.com/edugment/addMarks.php');
+    var response = await http.post(url, body: {
+      "username": '${widget.str}'.toString(),
+      "fileName": '${widget.fileName}'.toString(),
+      "mark": total.toString()
+    });
+
+    var data = json.decode(response.body);
   }
 
   @override
@@ -862,50 +863,187 @@ class _EvaluateProjectState extends State<EvaluateProject> {
                     SizedBox(
                       height: 20,
                     ),
-                    RaisedButton(
-                        onPressed: () {
-                          _calculateTotal();
-                          var alert = AlertDialog(
-                            title:
-                                Text(getTranslated(context, 'projectDetails')),
-                            content: Container(
-                              height: 130,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Divider(
-                                    color: Colors.black,
-                                  ),
-                                  Text("$total"),
-                                  SizedBox(
-                                    height: 12,
-                                  ),
-                                  SizedBox(
-                                    child: Center(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return alert;
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        RaisedButton(
+                            onPressed: () {
+                              //_calculateTotal();
+
+                              setState(() {
+                                total = (scienceResult +
+                                        technologyResult +
+                                        engineerResult +
+                                        artsResult +
+                                        mathResult +
+                                        productionResult +
+                                        humanityResult) ~/
+                                    7;
                               });
-                        },
-                        child: Text(
-                          "Calculate Mark",
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: 'Satisfy',
-                              color: Colors.redAccent),
-                        ))
+                              var alert = AlertDialog(
+                                title: Center(
+                                    child: Text(
+                                  getTranslated(context, 'result'),
+                                  style: TextStyle(
+                                      color: Colors.red, fontFamily: 'Quando'),
+                                )),
+                                content: Container(
+                                  height: 130,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Divider(
+                                        color: Colors.black,
+                                      ),
+                                      Center(
+                                          child: Text(
+                                        "$total",
+                                        style: TextStyle(
+                                            color: Colors.blue,
+                                            fontSize: 20,
+                                            fontFamily: 'Alike',
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      SizedBox(
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              RaisedButton(
+                                                color: Color.fromARGB(
+                                                    255, 122, 255, 127),
+                                                onPressed: () {
+                                                  Navigator.of(context,
+                                                          rootNavigator: true)
+                                                      .pop('alert');
+
+                                                  addMarks();
+
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                    backgroundColor:
+                                                        Colors.green[900],
+                                                    content: Text(
+                                                      getTranslated(
+                                                          context, 'markAdded'),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 16,
+                                                          fontFamily: 'Alike'),
+                                                    ),
+                                                  ));
+                                                },
+                                                child: Text(
+                                                    getTranslated(
+                                                        context, 'ok'),
+                                                    style: TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: 18,
+                                                        fontFamily: 'Alike',
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  });
+                            },
+                            child: Text(
+                              "Calculate Mark",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Satisfy',
+                                  color: Colors.redAccent),
+                            )),
+                        RaisedButton(
+                            onPressed: () {
+                              var alert = AlertDialog(
+                                title: Center(
+                                    child: Text(
+                                  getTranslated(context, 'badges'),
+                                  style: TextStyle(
+                                      color: Colors.red, fontFamily: 'Quando'),
+                                )),
+                                content: Container(
+                                  height: 130,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Divider(
+                                        color: Colors.black,
+                                      ),
+                                      Center(
+                                          child: Text(
+                                        "$total",
+                                        style: TextStyle(
+                                            color: Colors.blue,
+                                            fontSize: 20,
+                                            fontFamily: 'Alike',
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      SizedBox(
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              RaisedButton(
+                                                color: Color.fromARGB(
+                                                    255, 122, 255, 127),
+                                                onPressed: () {},
+                                                child: Text(
+                                                    getTranslated(
+                                                        context, 'ok'),
+                                                    style: TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: 18,
+                                                        fontFamily: 'Alike',
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  });
+                            },
+                            child: Text(
+                              "Give Badge",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Satisfy',
+                                  color: Colors.redAccent),
+                            ))
+                      ],
+                    )
                   ],
                 ),
               )

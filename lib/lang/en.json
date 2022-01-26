@@ -31,7 +31,10 @@
     "openProject": "Open",
     "evaluate":"Evaluate",
     "projectDetails": "Project Details",
-    "urlError": "Cannot load project, check internet connection"
+    "urlError": "Cannot load project, check internet connection",
+    "result": "Total Mark",
+    "markAdded" : "Mark Added",
+    "badges": "Badges"
 
     
 }
