@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Profile extends StatefulWidget {
-  const Profile({Key key}) : super(key: key);
+  final String str;
+  final String langCode;
+  const Profile({Key key, this.str, this.langCode}) : super(key: key);
 
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  /*Future<List<GetLesson>> fetchUsers() async {
+    String url =
+        "https://hadi.yallaproductionz.com/edugment/getPdfToTeacher.php?getUser=" +
+            '${widget.str}';
+    final response = await http.get(url);
+    return getLessonFromJson(response.body);
+  }*/
+
   int ninjaLevel = 0;
   @override
   Widget build(BuildContext context) {

@@ -20,9 +20,6 @@
 		echo json_encode("loginToTeacher");
 	}
 
-	else if($username == "" || $password == ""){
-		echo json_encode("filldata");
-	}
 
 	else{
 		echo json_encode("error");

@@ -1,13 +1,19 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:harmonic_learning/localization/localization_constants.dart';
 import 'package:harmonic_learning/pages/SustainableDevelopment.dart';
+import 'package:harmonic_learning/pages/badges.dart';
 import 'package:http/http.dart' as http;
+
+import 'teacherDashboard.dart';
 
 class EvaluateProject extends StatefulWidget {
   final String str;
   final String fileName;
-  const EvaluateProject({Key key, this.str, this.fileName}) : super(key: key);
+  final String langCode;
+  const EvaluateProject({Key key, this.str, this.fileName, this.langCode})
+      : super(key: key);
 
   @override
   _EvaluateProjectState createState() => _EvaluateProjectState();
@@ -207,9 +213,25 @@ class _EvaluateProjectState extends State<EvaluateProject> {
     var data = json.decode(response.body);
   }
 
+  String b1 = "B1";
+  String b2 = "B2";
+  String b3 = "B3";
+  String b4 = "B4";
+
+  Future<bool> _onBackPressed() {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => TeacherDashboard(
+                  str: '${widget.str}',
+                  langCode: '${widget.langCode}',
+                )));
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+      onWillPop: _onBackPressed,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
@@ -973,67 +995,13 @@ class _EvaluateProjectState extends State<EvaluateProject> {
                             )),
                         RaisedButton(
                             onPressed: () {
-                              var alert = AlertDialog(
-                                title: Center(
-                                    child: Text(
-                                  getTranslated(context, 'badges'),
-                                  style: TextStyle(
-                                      color: Colors.red, fontFamily: 'Quando'),
-                                )),
-                                content: Container(
-                                  height: 130,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Divider(
-                                        color: Colors.black,
-                                      ),
-                                      Center(
-                                          child: Text(
-                                        "$total",
-                                        style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 20,
-                                            fontFamily: 'Alike',
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      SizedBox(
-                                        child: Center(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              RaisedButton(
-                                                color: Color.fromARGB(
-                                                    255, 122, 255, 127),
-                                                onPressed: () {},
-                                                child: Text(
-                                                    getTranslated(
-                                                        context, 'ok'),
-                                                    style: TextStyle(
-                                                        color: Colors.red,
-                                                        fontSize: 18,
-                                                        fontFamily: 'Alike',
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return alert;
-                                  });
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Badges(
+                                            str: '${widget.str}',
+                                            fileName: '${widget.fileName}',
+                                          )));
                             },
                             child: Text(
                               "Give Badge",

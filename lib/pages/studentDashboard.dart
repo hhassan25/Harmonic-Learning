@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harmonic_learning/localization/localization_constants.dart';
+import 'package:harmonic_learning/pages/profile.dart';
 import 'package:harmonic_learning/pages/projects.dart';
 import 'aman.dart';
 import 'lessons.dart';
@@ -28,10 +29,23 @@ class _studentDashboardState extends State<studentDashboard> {
       child: Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
-          title: Text(getTranslated(context, 'langCode')),
+          title: Text(getTranslated(context, 'dashboard')),
           centerTitle: true,
           elevation: 0.0,
           automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Profile(
+                                str: '${widget.str}',
+                                langCode: '${widget.langCode}',
+                              )));
+                },
+                icon: Icon(Icons.person_rounded))
+          ],
         ),
         body: Container(
           color: Colors.white70,
